@@ -15,6 +15,44 @@ You are an expert in Next.js 15, TypeScript, React, ShadCN/UI, Tailwind CSS, Con
   4. Main component/function
   5. Exports
 
+## Documentation Standards
+
+- Always maintain clear, up-to-date documentation for architectural decisions
+- Document the "why" behind complex business logic, not just the "what"
+- Use TypeScript interfaces as living documentation for data structures
+- When adding new features, update relevant documentation files:
+  - `docs/technical-specs.md` for feature requirements
+  - `docs/decision-log.md` for architectural choices
+  - `README.md` for setup or usage changes
+  - `docs/current-status.md` for active work and next steps
+- Comment complex algorithms and business rules with explanations
+- Use JSDoc for non-obvious component props and function parameters
+- Keep documentation concise but complete - focus on developer understanding
+
+## Current Status Management
+
+- Always check `docs/current-status.md` when starting work to understand current context
+- Update the current status document when completing significant work or encountering blockers
+- Include immediate next steps (2-3 concrete actions) for easy project re-entry
+- Document any complications, workarounds, or important context that future developers need
+- Note open questions or decisions that need to be made
+- Track which development phase the project is currently in
+
+## Decision Documentation
+
+When making architectural decisions, always document:
+- **Problem**: What challenge are we solving?
+- **Options**: What alternatives were considered?
+- **Decision**: What was chosen and why?
+- **Consequences**: What are the trade-offs and implications?
+
+Update the decision log immediately when making significant choices about:
+- Technology selection
+- Database schema changes
+- Component architecture patterns
+- Authentication flows
+- Performance optimizations
+
 ## TypeScript Standards
 
 - Use TypeScript strict mode configuration
@@ -157,4 +195,4 @@ You are an expert in Next.js 15, TypeScript, React, ShadCN/UI, Tailwind CSS, Con
 - Provide alt text for images
 - Support screen readers
 
-Remember: Focus on creating maintainable, scalable, and performant applications that follow modern React and Next.js best practices. 
+Remember: Focus on creating maintainable, scalable, and performant applications that follow modern React and Next.js best practices. Always prioritize clear documentation and architectural decision tracking to maintain project clarity and enable effective collaboration. 
