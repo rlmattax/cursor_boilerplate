@@ -1,0 +1,148 @@
+# Modern SaaS Application Boilerplate Prompt
+
+I want to build a modern SaaS web application using the following proven architecture and tech stack. Please set up the complete foundation with professional patterns and best practices.
+
+## Tech Stack Requirements
+
+**Frontend Framework:**
+- Next.js 15 with App Router and TypeScript (strict mode)
+- Use ShadCN/UI component library + Tailwind CSS for styling
+- React Hook Form + Zod for form validation and schema validation
+
+**Backend & Database:**
+- Convex for real-time serverless database and API functions
+- User-scoped data patterns with proper indexing
+
+**Authentication:**
+- Clerk for authentication (social + email login)
+- Full user management with professional sign-in/sign-up flows
+
+**Development & Deployment:**
+- Vercel for deployment and hosting
+- Concurrent development servers (Convex + Next.js) with color-coded output
+- ESLint configuration with proper error handling
+
+## Project Structure Pattern
+
+```
+src/app/
+├── (marketing)/          # Public pages: landing, pricing, about
+│   ├── page.tsx         # Marketing landing page
+│   ├── sign-in/         # Branded sign-in page
+│   └── sign-up/         # Branded sign-up page
+├── (authenticated)/      # Protected app pages
+│   ├── layout.tsx       # App shell wrapper
+│   ├── dashboard/       # Main dashboard
+│   ├── settings/        # User settings
+│   └── [features]/      # Feature-specific pages
+├── globals.css          # Global styles
+├── layout.tsx           # Root layout with ClerkProvider
+└── middleware.ts        # Route protection
+
+src/components/
+├── ui/                  # ShadCN/UI components
+├── layout/              # App shell (header, sidebar, navigation) 
+├── [domain]/            # Feature-specific components
+└── shared/              # Reusable business components
+
+src/lib/
+├── types.ts             # TypeScript interfaces
+├── utils.ts             # Utility functions (cn, etc.)
+└── validations.ts       # Zod schemas
+
+convex/
+├── schema.ts            # Database schema with proper indexes
+└── [functions]/         # API functions and mutations
+```
+
+## Authentication Architecture
+
+- ClerkProvider in root layout
+- Middleware protecting all routes matching `/dashboard(.*)`, `/settings(.*)`, etc.
+- Route groups for logical separation of public vs authenticated content
+- Professional sign-in/sign-up pages with consistent branding
+- UserButton in app header showing real user data
+- Proper redirect flows (sign-in → dashboard)
+
+## UI/UX Patterns to Implement
+
+**Marketing Landing Page:**
+- Hero section with clear value proposition
+- Features section with icons and descriptions
+- Use cases/examples section
+- Call-to-action buttons linking to sign-up
+- Professional footer
+
+**App Layout:**
+- Header with logo, search bar, user menu
+- Sidebar navigation with active states
+- Main content area with proper spacing
+- Empty states with clear CTAs and helpful examples
+
+**Component Patterns:**
+- Professional forms with validation feedback
+- Cards with hover effects and transitions
+- Modals/dialogs for actions (create, edit, delete)
+- Search + filter interfaces with active filter badges
+- Loading states and error handling
+- Responsive design (mobile-first approach)
+
+## Database Schema Patterns
+
+- All tables include `userId` field with proper indexing
+- Timestamps: `_creationTime`, `updatedAt`
+- Soft deletes using `isArchived` boolean where appropriate
+- Search indexes on text fields that need to be searchable
+- Proper foreign key relationships with Convex ID types
+
+## Development Workflow Setup
+
+**Package.json scripts:**
+- `npm run dev`: Concurrent Convex + Next.js (color-coded output)
+- `npm run dev:next`: Next.js development server only
+- `npm run build`: Production build
+- `npm run lint`: ESLint checking
+
+**Key Dependencies:**
+- react-hook-form + @hookform/resolvers/zod for forms
+- next/image for optimized images
+- lucide-react for icons
+- concurrently for dev server management
+- clsx for conditional CSS classes
+
+## Architectural Decisions to Follow
+
+✅ App Router over Pages Router (better for modern React patterns)
+✅ Server Components by default, Client Components only when needed
+✅ Route groups for logical separation of concerns
+✅ Middleware-based authentication protection
+✅ ShadCN/UI over monolithic component libraries (more customizable)
+✅ Convex over traditional SQL databases (real-time, simpler to develop)
+✅ TypeScript strict mode from day 1
+✅ Professional UI patterns: cards, dialogs, dropdowns, proper spacing
+
+## Implementation Steps
+
+1. **Setup Foundation:**
+   - Initialize Next.js 15 project with TypeScript
+   - Install and configure ShadCN/UI + Tailwind
+   - Set up Convex project and schema
+   - Configure Clerk authentication
+
+2. **Create Route Structure:**
+   - Set up (marketing) and (authenticated) route groups
+   - Implement middleware for route protection
+   - Create basic page structure
+
+3. **Build Core Components:**
+   - App layout with header, sidebar, navigation
+   - Marketing landing page
+   - Authentication pages (sign-in/sign-up)
+   - Empty states and loading components
+
+4. **Development Workflow:**
+   - Configure concurrent dev servers
+   - Set up proper npm scripts
+   - Configure ESLint and TypeScript
+
+Please implement this complete foundation, ensuring all components are production-ready with proper TypeScript types, responsive design, and professional UI patterns. Focus on creating a solid architecture that can scale with additional features. 
