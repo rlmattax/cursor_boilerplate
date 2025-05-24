@@ -1,0 +1,160 @@
+# Cursor Rules for Modern SaaS Applications
+
+You are an expert in Next.js 15, TypeScript, React, ShadCN/UI, Tailwind CSS, Convex, and Clerk.
+
+## Code Style & Quality
+
+- Write concise, technical TypeScript code with accurate examples
+- Use functional and declarative programming patterns; avoid classes
+- Prefer iteration and modularization over code duplication
+- Use descriptive variable names with auxiliary verbs (e.g., `isLoading`, `hasError`)
+- Structure files with exports at the bottom, following this order:
+  1. Imports (external libraries, then internal)
+  2. Types and interfaces
+  3. Constants and utilities
+  4. Main component/function
+  5. Exports
+
+## TypeScript Standards
+
+- Use TypeScript strict mode configuration
+- Define proper interfaces for all props and data structures
+- Use `const` assertions for objects that shouldn't change
+- Prefer `type` for unions, `interface` for object shapes
+- Use generic types when building reusable components
+- Avoid `any` types; use proper typing or `unknown` if needed
+
+## React & Next.js 15 App Router
+
+- Use Server Components by default; only use Client Components when necessary
+- Mark Client Components with `"use client"` directive at the top
+- Use Next.js App Router file-based routing with route groups
+- Implement proper loading.tsx and error.tsx files
+- Use Next.js Image component for optimized images
+- Follow the established route group pattern:
+  - `(marketing)` for public pages
+  - `(authenticated)` for protected app pages
+- Use middleware.ts for route protection and authentication
+
+## Component Architecture
+
+- Create reusable components in appropriate directories:
+  - `src/components/ui/` for ShadCN/UI base components
+  - `src/components/layout/` for app shell components
+  - `src/components/[domain]/` for feature-specific components
+  - `src/components/shared/` for reusable business components
+- Use compound component patterns for complex UI elements
+- Implement proper error boundaries and loading states
+- Use React.forwardRef for components that need ref forwarding
+
+## ShadCN/UI & Styling
+
+- Use ShadCN/UI components as the foundation; customize with className prop
+- Use Tailwind CSS utility classes; avoid custom CSS when possible
+- Follow mobile-first responsive design principles
+- Use CSS variables for theme consistency (defined in globals.css)
+- Implement proper hover states, focus states, and transitions
+- Use `cn()` utility function for conditional className logic
+
+## Form Handling
+
+- Use React Hook Form with Zod validation for all forms
+- Create Zod schemas in `src/lib/validations.ts`
+- Implement proper error handling and display
+- Use ShadCN/UI Form components for consistent styling
+- Handle loading states during form submission
+- Provide clear success/error feedback to users
+
+## Database & API (Convex)
+
+- Define schemas in `convex/schema.ts` with proper indexes
+- Include `userId` field in all user-scoped tables
+- Use `_creationTime` and `updatedAt` timestamps
+- Implement soft deletes with `isArchived` boolean
+- Use proper Convex query and mutation patterns
+- Handle loading and error states in components consuming Convex data
+
+## Authentication (Clerk)
+
+- Wrap root layout with ClerkProvider
+- Use middleware for route protection
+- Implement branded sign-in/sign-up pages
+- Use UserButton component in app header
+- Handle unauthenticated states gracefully
+- Redirect properly after authentication
+
+## File Naming & Organization
+
+- Use kebab-case for file and folder names
+- Use PascalCase for component files (e.g., `UserProfile.tsx`)
+- Use camelCase for utility files (e.g., `formatDate.ts`)
+- Group related files in feature-based folders
+- Keep page files minimal; move logic to components
+
+## UI/UX Patterns
+
+- Implement empty states with clear CTAs and helpful examples
+- Use skeleton loading states for better perceived performance
+- Show loading spinners for actions that take time
+- Implement proper error handling with user-friendly messages
+- Use consistent spacing and typography scale
+- Implement hover effects and micro-interactions
+- Ensure all interactive elements have proper focus states
+
+## Data Patterns
+
+- Use optimistic updates for better user experience
+- Implement proper pagination for lists
+- Use debounced search inputs
+- Cache frequently accessed data appropriately
+- Handle offline states gracefully
+
+## Error Handling
+
+- Use error boundaries for component-level error handling
+- Implement proper try/catch blocks in async functions
+- Show user-friendly error messages
+- Log errors appropriately for debugging
+- Provide fallback UI for failed components
+
+## Performance
+
+- Use React.memo() for expensive re-renders
+- Implement proper code splitting with Next.js dynamic imports
+- Optimize images with Next.js Image component
+- Use React.Suspense for component lazy loading
+- Minimize bundle size by importing only needed utilities
+
+## Testing Considerations
+
+- Write components that are easily testable
+- Use data-testid attributes for testing selectors
+- Keep components pure when possible
+- Separate business logic from UI components
+
+## Development Workflow
+
+- Use concurrent development servers (Convex + Next.js)
+- Follow git commit message conventions
+- Use proper ESLint configuration
+- Format code consistently with Prettier
+- Use TypeScript strict mode
+
+## Security
+
+- Sanitize user inputs
+- Use proper authentication checks
+- Implement CSRF protection
+- Validate data on both client and server
+- Use environment variables for sensitive configuration
+
+## Accessibility
+
+- Use semantic HTML elements
+- Implement proper ARIA attributes
+- Ensure keyboard navigation works
+- Use sufficient color contrast
+- Provide alt text for images
+- Support screen readers
+
+Remember: Focus on creating maintainable, scalable, and performant applications that follow modern React and Next.js best practices. 
