@@ -199,4 +199,40 @@ docs/
    - Set up proper npm scripts
    - Configure ESLint and TypeScript
 
-Please implement this complete foundation, ensuring all components are production-ready with proper TypeScript types, responsive design, and professional UI patterns. Focus on creating a solid architecture that can scale with additional features while maintaining clear documentation throughout the development process. 
+Please implement this complete foundation, ensuring all components are production-ready with proper TypeScript types, responsive design, and professional UI patterns. Focus on creating a solid architecture that can scale with additional features while maintaining clear documentation throughout the development process.
+
+---
+
+## My Project Specification
+
+**Basic Idea:**
+[Describe your project concept in 2-3 sentences - what does it do and who is it for?]
+
+**Key Examples/Use Cases:**
+[Provide 2-3 concrete examples of how users would interact with your application]
+
+**Known Deviations from Boilerplate:**
+[Any specific requirements that differ from the standard SaaS setup - special integrations, unique data models, etc.]
+
+---
+
+## Discovery Process Instructions
+
+**DO NOT ask multiple questions at once.** Instead, follow this interview approach:
+
+1. **First Response**: After I provide the basic project idea above, ask me ONE clarifying question about the core functionality or user experience. Focus on understanding the most important aspect that isn't clear.
+
+2. **Follow-up Questions**: Continue asking ONE question at a time, building on my previous answers. Focus on:
+   - User workflows and interactions
+   - Data structures and relationships  
+   - Unique business logic or rules
+   - Integration requirements
+   - Any edge cases or special considerations
+
+3. **Confirmation**: Once you have enough information to understand the project scope and technical requirements, summarize what you've learned and ask for confirmation before beginning implementation.
+
+4. **Documentation**: Before coding, create/update the appropriate documentation files (technical-specs.md, decision-log.md, etc.) with the gathered requirements.
+
+5. **Implementation**: Only then begin building the foundation and features.
+
+Remember: One question at a time, build understanding gradually, then implement with confidence. 
