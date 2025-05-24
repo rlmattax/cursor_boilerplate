@@ -22,6 +22,48 @@ I want to build a modern SaaS web application using the following proven archite
 - Concurrent development servers (Convex + Next.js) with color-coded output
 - ESLint configuration with proper error handling
 
+## Documentation Strategy
+
+**Essential Documentation Files:**
+- `README.md`: Project overview, setup instructions, and key commands
+- `docs/technical-specs.md`: Feature specifications and requirements
+- `docs/decision-log.md`: Architectural decisions with rationale and alternatives considered
+- `docs/mvp-roadmap.md`: Phased development plan with clear milestones
+- `docs/environment-setup.md`: Detailed development environment configuration
+- `docs/current-status.md`: Active work status and immediate next steps
+
+**Code Documentation Standards:**
+- TypeScript interfaces serve as living documentation
+- Complex business logic requires inline comments explaining "why" not "what"
+- Component props documented with JSDoc when non-obvious
+- API functions documented with clear parameter and return type descriptions
+- README in each major feature directory explaining the domain
+
+**Decision Documentation Pattern:**
+For each major architectural decision, document:
+- **Problem**: What challenge are we solving?
+- **Options**: What alternatives did we consider?
+- **Decision**: What did we choose and why?
+- **Consequences**: What are the trade-offs?
+
+**Current Status Tracking:**
+Maintain `docs/current-status.md` with:
+- **Current Phase**: What development phase we're in (Foundation, Features, etc.)
+- **Last Completed**: What was just finished in the previous session
+- **Currently Working On**: Active tasks and their progress
+- **Immediate Next Steps**: 2-3 concrete next actions to take
+- **Open Questions**: Decisions needed or problems to solve
+- **Blockers**: Anything preventing progress
+- **Notes**: Context, complications, or important details to remember
+
+Update this document at the end of each development session to preserve context.
+
+**Maintenance Documentation:**
+- Keep a running log of breaking changes and migration notes
+- Document environment variables and their purposes
+- Maintain dependency reasoning (why we chose specific packages)
+- Update setup instructions when development workflow changes
+
 ## Project Structure Pattern
 
 ```
@@ -53,6 +95,12 @@ src/lib/
 convex/
 ├── schema.ts            # Database schema with proper indexes
 └── [functions]/         # API functions and mutations
+
+docs/
+├── technical-specs.md   # Feature specifications
+├── decision-log.md      # Architectural decisions
+├── mvp-roadmap.md       # Development phases
+└── environment-setup.md # Development setup
 ```
 
 ## Authentication Architecture
@@ -129,20 +177,26 @@ convex/
    - Set up Convex project and schema
    - Configure Clerk authentication
 
-2. **Create Route Structure:**
+2. **Create Documentation Structure:**
+   - Set up docs/ directory with template files
+   - Initialize decision log with tech stack rationale
+   - Create technical specs template
+   - Document development environment setup
+
+3. **Create Route Structure:**
    - Set up (marketing) and (authenticated) route groups
    - Implement middleware for route protection
    - Create basic page structure
 
-3. **Build Core Components:**
+4. **Build Core Components:**
    - App layout with header, sidebar, navigation
    - Marketing landing page
    - Authentication pages (sign-in/sign-up)
    - Empty states and loading components
 
-4. **Development Workflow:**
+5. **Development Workflow:**
    - Configure concurrent dev servers
    - Set up proper npm scripts
    - Configure ESLint and TypeScript
 
-Please implement this complete foundation, ensuring all components are production-ready with proper TypeScript types, responsive design, and professional UI patterns. Focus on creating a solid architecture that can scale with additional features. 
+Please implement this complete foundation, ensuring all components are production-ready with proper TypeScript types, responsive design, and professional UI patterns. Focus on creating a solid architecture that can scale with additional features while maintaining clear documentation throughout the development process. 
