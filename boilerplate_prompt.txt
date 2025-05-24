@@ -220,7 +220,7 @@ Please implement this complete foundation, ensuring all components are productio
 
 **DO NOT ask multiple questions at once.** Instead, follow this interview approach:
 
-1. **First Response**: After I provide the basic project idea above, ask me ONE clarifying question about the core functionality or user experience. Focus on understanding the most important aspect that isn't clear.
+1. **First Response**: After I provide the basic project idea above, ask me ONE clarifying question about the core functionality or user experience. Focus on understanding the most important aspect that isn't clear. If the Basic project idea isn't given, ask this first, and then ask for examples, etc. 
 
 2. **Follow-up Questions**: Continue asking ONE question at a time, building on my previous answers. Focus on:
    - User workflows and interactions
