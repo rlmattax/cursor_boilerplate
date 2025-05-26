@@ -2,6 +2,33 @@
 
 You are an expert in Next.js 15, TypeScript, React, ShadCN/UI, Tailwind CSS, Convex, and Clerk.
 
+## 🚨 CRITICAL CODE QUALITY RULES
+
+### Absolute Prohibitions
+- **NEVER use `any` type** - Always use proper TypeScript types or `unknown` with type guards
+- **NEVER use `<img>` tags** - Always use Next.js `<Image>` component for performance
+- **NEVER disable ESLint rules** without explicit justification in comments
+- **NEVER commit code with TypeScript errors** - Fix all type issues before suggesting edits
+
+### Type Safety Requirements
+- Always provide explicit types for function parameters and return values
+- Use `as const` for readonly arrays and objects
+- Prefer `type` for unions, `interface` for object shapes
+- Use generic types `<T>` for reusable components and functions
+- When importing types, use `import type { ... }` syntax
+
+### Testing Requirements
+- Write tests IMMEDIATELY after implementing components/hooks
+- Use semantic queries: `getByRole` > `getByLabelText` > `getByText` > `getByTestId`
+- Always test error states, loading states, and edge cases
+- Mock external dependencies (Clerk, Convex, Next.js) properly
+
+### React/Next.js Requirements
+- Use Server Components by default, Client Components only when necessary
+- Always use `"use client"` directive at the top of Client Components
+- Use Next.js `<Image>` component with proper `alt` attributes
+- Implement proper error boundaries and loading states
+
 ## Code Style & Quality
 
 - Write concise, technical TypeScript code with accurate examples
@@ -14,6 +41,251 @@ You are an expert in Next.js 15, TypeScript, React, ShadCN/UI, Tailwind CSS, Con
   3. Constants and utilities
   4. Main component/function
   5. Exports
+
+## Testing Philosophy & Implementation
+
+### Core Testing Principles
+- **Test behavior, not implementation** - Focus on what users see and do
+- **User-centric approach** - Use semantic queries that mirror real user interactions
+- **Integration over isolation** - Test components working together
+- **Accessibility-first** - Queries should promote good UX practices
+
+### When to Write Tests
+**ALWAYS write tests when:**
+- Creating new components (especially reusable ones)
+- Adding new custom hooks
+- Implementing form validation logic
+- Creating utility functions
+- Building critical user workflows
+- Adding error handling patterns
+
+**Write tests IMMEDIATELY after:**
+- Component implementation is complete
+- Custom hook is functional
+- Form validation is added
+- API integration is working
+- User interaction is implemented
+
+### Test File Organization
+```
+src/
+├── __tests__/
+│   ├── components/
+│   │   ├── ui/           # ShadCN/UI component tests
+│   │   │   ├── UserProfile.test.tsx
+│   │   │   └── ...
+│   │   ├── objects/      # Object-related component tests
+│   │   ├── entries/      # Entry-related component tests
+│   │   └── shared/       # Shared component tests
+│   ├── hooks/            # Custom hook tests
+│   ├── lib/              # Utility function tests
+│   └── pages/            # Integration tests
+```
+
+### Component Testing Patterns
+
+**Test Structure:**
+```typescript
+import { render, screen, userEvent } from '@/lib/test-utils'
+import { ComponentName } from '@/components/path/to/component'
+
+describe('ComponentName', () => {
+  const user = userEvent.setup()
+  
+  it('should describe expected behavior', async () => {
+    // Arrange
+    render(<ComponentName prop="value" />)
+    
+    // Act
+    await user.click(screen.getByRole('button', { name: /submit/i }))
+    
+    // Assert
+    expect(screen.getByText(/success/i)).toBeInTheDocument()
+  })
+})
+```
+
+**What to Test in Components:**
+- User interactions (clicks, typing, form submissions)
+- Conditional rendering based on props/state
+- Error states and loading states
+- Accessibility attributes and keyboard navigation
+- Integration with custom hooks
+- Form validation and submission
+
+**Query Priority (use in this order):**
+1. `getByRole` - Most accessible, preferred
+2. `getByLabelText` - Form elements
+3. `getByText` - Content-based queries
+4. `getByTestId` - Only when semantic queries aren't possible
+
+### Hook Testing Patterns
+
+**Test Structure:**
+```typescript
+import { renderHook, act } from '@testing-library/react'
+import { useCustomHook } from '@/hooks/use-custom-hook'
+
+describe('useCustomHook', () => {
+  it('should handle expected behavior', () => {
+    const { result } = renderHook(() => useCustomHook())
+    
+    act(() => {
+      result.current.someFunction()
+    })
+    
+    expect(result.current.someValue).toBe(expectedValue)
+  })
+})
+```
+
+**What to Test in Hooks:**
+- State management logic
+- Side effects (API calls, localStorage)
+- Error handling and recovery
+- Return value consistency
+- Dependencies and cleanup
+
+### Form Testing Patterns
+
+**Always test:**
+- Field validation (required, format, length)
+- Error message display
+- Successful submission
+- Loading states during submission
+- Accessibility of form elements
+
+```typescript
+it('should validate required fields', async () => {
+  render(<MyForm onSubmit={mockSubmit} />)
+  
+  await user.click(screen.getByRole('button', { name: /submit/i }))
+  
+  expect(screen.getByText(/field is required/i)).toBeInTheDocument()
+  expect(mockSubmit).not.toHaveBeenCalled()
+})
+```
+
+### Mock Patterns
+
+**Convex Mocking:**
+```typescript
+import { useQuery, useMutation } from 'convex/react'
+
+const mockUseQuery = useQuery as jest.MockedFunction<typeof useQuery>
+const mockUseMutation = useMutation as jest.MockedFunction<typeof useMutation>
+
+beforeEach(() => {
+  mockUseQuery.mockReturnValue(mockData)
+  mockUseMutation.mockReturnValue(jest.fn())
+})
+```
+
+**Component Props Mocking:**
+```typescript
+const defaultProps = {
+  onSubmit: jest.fn(),
+  isLoading: false,
+  error: null,
+}
+```
+
+### E2E Testing Guidelines
+
+**Critical paths to test:**
+- User authentication flow
+- Object creation and management
+- Entry creation and editing
+- Navigation between pages
+- Error handling scenarios
+
+**E2E Test Structure:**
+```typescript
+import { test, expect } from '@playwright/test'
+
+test.describe('Feature Name', () => {
+  test('should complete user journey', async ({ page }) => {
+    await page.goto('/dashboard')
+    
+    await page.click('[data-testid="create-button"]')
+    await page.fill('[name="title"]', 'Test Title')
+    await page.click('[type="submit"]')
+    
+    await expect(page.locator('[data-testid="success-message"]')).toBeVisible()
+  })
+})
+```
+
+### Test Data Helpers
+
+**Use the provided helpers in test-utils.tsx:**
+```typescript
+import { createMockUser, createMockObject, createMockEntry } from '@/lib/test-utils'
+
+const user = createMockUser({ firstName: 'Custom Name' })
+const object = createMockObject({ name: 'Test Object' })
+```
+
+### Testing Commands
+
+**Development workflow:**
+```bash
+npm run test:watch    # Use while developing
+npm run test         # Run before commits
+npm run test:coverage # Check coverage periodically
+```
+
+### Coverage Expectations
+
+**Minimum coverage targets:**
+- Components: 80%+
+- Hooks: 90%+
+- Utilities: 95%+
+- Critical paths: 100%
+
+**Focus areas for high coverage:**
+- Form validation logic
+- Error handling
+- User authentication flows
+- Data transformation utilities
+- State management hooks
+
+### Test Naming Conventions
+
+```typescript
+// Component tests
+describe('ComponentName', () => {
+  it('should render with correct props', () => {})
+  it('should handle user interaction', async () => {})
+  it('should display error state', () => {})
+  it('should be accessible', () => {})
+})
+
+// Hook tests  
+describe('useHookName', () => {
+  it('should return initial state', () => {})
+  it('should update state on action', () => {})
+  it('should handle error cases', () => {})
+})
+```
+
+### Integration with Development
+
+**When creating components, ALWAYS:**
+1. Add `data-testid` attributes for complex interactions
+2. Use semantic HTML for better testability
+3. Ensure keyboard navigation works
+4. Test error and loading states
+5. Write tests immediately after implementation
+
+**When adding features:**
+1. Write component tests first (TDD when possible)
+2. Test the happy path
+3. Test error scenarios
+4. Test edge cases
+5. Verify accessibility
+
+Remember: Tests are living documentation of your component's behavior. Write them as if explaining to a new developer how the component should work.
 
 ## Documentation Standards
 
@@ -162,13 +434,6 @@ Update the decision log immediately when making significant choices about:
 - Optimize images with Next.js Image component
 - Use React.Suspense for component lazy loading
 - Minimize bundle size by importing only needed utilities
-
-## Testing Considerations
-
-- Write components that are easily testable
-- Use data-testid attributes for testing selectors
-- Keep components pure when possible
-- Separate business logic from UI components
 
 ## Development Workflow
 
